@@ -15,7 +15,7 @@ public class AdminDashboard {
         jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jfrm.setLocationRelativeTo(null);
 
-        // Set a modern look and feel
+        
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception ignored) {}
@@ -73,35 +73,35 @@ class AddBook extends JPanel {
         gbc.insets = new Insets(10, 15, 10, 15);
         gbc.anchor = GridBagConstraints.WEST;
 
-        // Book Name
+        
         JLabel lbName = new JLabel("Book Name:");
         lbName.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         JTextField name = new JTextField(15);
         name.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         name.setBorder(BorderFactory.createLineBorder(new Color(180, 200, 255), 1));
 
-        // Book ID
+    
         JLabel lbId = new JLabel("Book Number:");
         lbId.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         JTextField number = new JTextField(15);
         number.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         number.setBorder(BorderFactory.createLineBorder(new Color(180, 200, 255), 1));
 
-        // Book Author
+        
         JLabel lbAuthor = new JLabel("Book Author:");
         lbAuthor.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         JTextField author = new JTextField(15);
         author.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         author.setBorder(BorderFactory.createLineBorder(new Color(180, 200, 255), 1));
 
-        // Shelf Number
+        
         JLabel lbShelf = new JLabel("Shelf Number:");
         lbShelf.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         JTextField shelf = new JTextField(15);
         shelf.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         shelf.setBorder(BorderFactory.createLineBorder(new Color(180, 200, 255), 1));
 
-        // Message label
+        
         JLabel lbMsg = new JLabel("");
         lbMsg.setFont(new Font("Segoe UI", Font.BOLD, 14));
         lbMsg.setForeground(new Color(0, 120, 0));
@@ -321,7 +321,7 @@ class ViewBook extends JPanel {
         btnPanel.add(jb);
         add(btnPanel, BorderLayout.SOUTH);
 
-        // Updated column names
+        
         String[] columnNames = {"Book Name", "Book ID", "Author", "Shelf"};
         model = new DefaultTableModel(columnNames, 0) {
             @Override
@@ -347,7 +347,7 @@ class ViewBook extends JPanel {
 
         jb.addActionListener(ae -> loadbooks());
 
-        // Load books initially
+        
         loadbooks();
     }
 
@@ -381,219 +381,6 @@ class ViewBook extends JPanel {
         }
     }
 }
-
-    
-/*class IssueBook extends JPanel {
-
-    DefaultTableModel model;
-
-    IssueBook() {
-        setLayout(new BorderLayout(15, 15));
-        setBackground(new Color(245, 250, 255));
-
-        JPanel formPanel = new JPanel(new GridBagLayout());
-        formPanel.setBackground(new Color(235, 245, 255));
-        formPanel.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(new Color(100, 150, 255), 2, true),
-                "Issue Book",
-                0, 0, new Font("Segoe UI", Font.BOLD, 16), new Color(40, 80, 160)
-        ));
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 15, 10, 15);
-        gbc.anchor = GridBagConstraints.WEST;
-
-        JLabel lbUsn = new JLabel("Student USN:");
-        lbUsn.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        JTextField tfUsn = new JTextField(15);
-        tfUsn.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        tfUsn.setBorder(BorderFactory.createLineBorder(new Color(180, 200, 255), 1));
-
-        JLabel lbBookId = new JLabel("Book ID:");
-        lbBookId.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        JTextField tfBookId = new JTextField(15);
-        tfBookId.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        tfBookId.setBorder(BorderFactory.createLineBorder(new Color(180, 200, 255), 1));
-
-        JLabel lbMsg = new JLabel("");
-        lbMsg.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        lbMsg.setForeground(new Color(0, 120, 0));
-
-        gbc.gridx = 0; gbc.gridy = 0;
-        formPanel.add(lbUsn, gbc);
-        gbc.gridx = 1;
-        formPanel.add(tfUsn, gbc);
-
-        gbc.gridx = 0; gbc.gridy = 1;
-        formPanel.add(lbBookId, gbc);
-        gbc.gridx = 1;
-        formPanel.add(tfBookId, gbc);
-
-        gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2;
-        formPanel.add(lbMsg, gbc);
-
-        add(formPanel, BorderLayout.NORTH);
-
-        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        btnPanel.setBackground(new Color(235, 245, 255));
-        JButton issueBtn = new JButton("Issue Book");
-        issueBtn.setFont(new Font("Segoe UI", Font.BOLD, 15));
-        issueBtn.setBackground(new Color(100, 150, 255));
-        issueBtn.setForeground(Color.WHITE);
-        issueBtn.setFocusPainted(false);
-        issueBtn.setBorder(BorderFactory.createEmptyBorder(8, 25, 8, 25));
-        btnPanel.add(issueBtn);
-        add(btnPanel, BorderLayout.SOUTH);
-
-        String[] columns = {"ID", "Student USN", "Book ID", "Issue Date", "Return Date", "Status"};
-        model = new DefaultTableModel(columns, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) { return false; }
-        };
-        JTable table = new JTable(model);
-        table.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
-        table.setRowHeight(28);
-        table.setSelectionBackground(new Color(220, 230, 255));
-        table.setGridColor(new Color(200, 220, 255));
-        table.setShowGrid(true);
-
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(new Color(100, 150, 255), 2, true),
-                "Issued Books",
-                0, 0, new Font("Segoe UI", Font.BOLD, 16), new Color(40, 80, 160)
-        ));
-        add(scrollPane, BorderLayout.CENTER);
-
-        loadIssuedBooks();
-
-        issueBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-                String usn = tfUsn.getText().trim();
-                String bookIdStr = tfBookId.getText().trim();
-                if (usn.isEmpty() || bookIdStr.isEmpty()) {
-                    lbMsg.setText("Please fill all fields.");
-                    lbMsg.setForeground(Color.RED);
-                    return;
-                }
-                try {
-                
-                    boolean success = issuebookdb(usn, bookIdStr);
-                    if (success) {
-                        lbMsg.setText("Book issued successfully!");
-                        lbMsg.setForeground(new Color(0, 120, 0));
-                        tfUsn.setText(""); tfBookId.setText("");
-                        loadIssuedBooks();
-                    } else {
-                        lbMsg.setText("Book not issued.");
-                        lbMsg.setForeground(Color.RED);
-                    }
-                } catch (NumberFormatException ex) {
-                    lbMsg.setText("Book ID must be a number.");
-                    lbMsg.setForeground(Color.RED);
-                }
-            }
-        });
-    }
-
-   boolean issuebookdb(String usn, String bookId) {
-    try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection conn = DriverManager.getConnection(
-    "jdbc:mysql://mysql-2a105d13-suyashpatkar66-9638.i.aivencloud.com:22420/librarysys?useSSL=true&verifyServerCertificate=false",
-    "avnadmin",
-    "AVNS_aTyMe6O1dg4BxCmQGaY"
-);
-
-
-
-        // 1. Check book availability
-        String checkBookQty = "SELECT bookquantity FROM books WHERE bookid=?";
-        PreparedStatement ps1 = conn.prepareStatement(checkBookQty);
-        ps1.setString(1, bookId);
-        ResultSet rsBook = ps1.executeQuery();
-        if (!rsBook.next()) {
-            JOptionPane.showMessageDialog(this, "Book ID not found!");
-            conn.close();
-            return false;
-        }
-        int availableQty = rsBook.getInt("bookquantity");
-        if (availableQty <= 0) {
-            JOptionPane.showMessageDialog(this, "Cannot issue. Book is out of stock!");
-            conn.close();
-            return false;
-        }
-
-        // 2. Check total books already issued to this student
-        String checkStudentTotal = "SELECT IFNULL(SUM(bookquantity),0) AS totalBooks FROM issuedbooks WHERE studentusn=? AND returndate IS NULL";
-        PreparedStatement ps2 = conn.prepareStatement(checkStudentTotal);
-        ps2.setString(1, usn);
-        ResultSet rsTotal = ps2.executeQuery();
-        int totalBooks = 0;
-        if (rsTotal.next()) {
-            totalBooks = rsTotal.getInt("totalBooks");
-        }
-        if (totalBooks + 1 > 3) {  // +1 because we are issuing 1 book
-            JOptionPane.showMessageDialog(this, "Cannot issue. Student already has " + totalBooks + " books issued. Max allowed is 3.");
-            conn.close();
-            return false;
-        }
-
-        // 3. Issue book
-        String issueBook = "INSERT INTO issuedbooks (studentusn, bookid, bookquantity, issuedate) VALUES (?, ?, 1, CURDATE())";
-        PreparedStatement ps3 = conn.prepareStatement(issueBook);
-        ps3.setString(1, usn);
-        ps3.setString(2, bookId);
-        int rows = ps3.executeUpdate();
-
-        // 4. Update book quantity
-        String updateQty = "UPDATE books SET bookquantity = bookquantity - 1 WHERE bookid=?";
-        PreparedStatement ps4 = conn.prepareStatement(updateQty);
-        ps4.setString(1, bookId);
-        ps4.executeUpdate();
-
-        conn.close();
-        return rows > 0;
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
-        return false;
-    }
-}
-
-
-    void loadIssuedBooks() {
-        model.setRowCount(0);
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/librarysys", "root", "mybag468");
-
-            String query = "SELECT id, studentusn, bookid, issuedate, returndate, " +
-                    "CASE WHEN returndate IS NULL THEN 'Issued' ELSE 'Returned' END AS status " +
-                    "FROM issuedbooks";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String usn = rs.getString("studentusn");
-                String bookId = rs.getString("bookid");
-                Date issueDate = rs.getDate("issuedate");
-                Date returnDate = rs.getDate("returndate");
-                String status = rs.getString("status");
-                model.addRow(new Object[]{id, usn, bookId, issueDate, returnDate, status});
-            }
-
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}*/
-
 class IssueBook extends JPanel {
 
     DefaultTableModel model;
@@ -985,7 +772,7 @@ class ManageStudents extends JPanel {
 
         add(formPanel, BorderLayout.NORTH);
 
-        // Search button
+    
         JButton searchBtn = new JButton("Search");
         searchBtn.setFont(new Font("Segoe UI", Font.BOLD, 15));
         searchBtn.setBackground(new Color(100, 150, 255));
@@ -998,7 +785,7 @@ class ManageStudents extends JPanel {
         btnPanel.add(searchBtn);
         add(btnPanel, BorderLayout.SOUTH);
 
-        // Table
+        
         String[] columns = {"USN", "Name", "Year", "Branch", "Section"};
         model = new DefaultTableModel(columns, 0);
         JTable studentTable = new JTable(model);
@@ -1018,7 +805,7 @@ class ManageStudents extends JPanel {
         ));
         add(scrollPane, BorderLayout.CENTER);
 
-        // Button action
+    
         searchBtn.addActionListener(ae -> {
             String year = (String) jbc1.getSelectedItem();
             String branch = (String) jbc2.getSelectedItem();
@@ -1026,7 +813,7 @@ class ManageStudents extends JPanel {
             loadstudentlist(year, branch, sec);
         });
 
-        // Table click for profile
+        
         studentTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -1073,7 +860,7 @@ class ManageStudents extends JPanel {
         }
     }
 
-    // Keep your showStudentProfile(usn) method as-is
+
 
 
 private void showStudentProfile(String usn) {
@@ -1087,15 +874,15 @@ private void showStudentProfile(String usn) {
         root.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         frame.add(root);
 
-        // Top panel with photo and details
+        
         JPanel topPanel = new JPanel(new BorderLayout(10, 10));
 
-        // Photo panel (left)
+    
         JLabel photoLabel = new JLabel("No Photo", SwingConstants.CENTER);
         photoLabel.setPreferredSize(new Dimension(160,160));
         topPanel.add(photoLabel, BorderLayout.WEST);
 
-        // Details panel (right)
+        
         JPanel detailsPanel = new JPanel();
         detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
         detailsPanel.setBorder(BorderFactory.createTitledBorder("Student Details"));
@@ -1124,7 +911,7 @@ private void showStudentProfile(String usn) {
 
         root.add(topPanel, BorderLayout.NORTH);
 
-        // Borrowed books table below
+        
         DefaultTableModel model = new DefaultTableModel(
             new String[]{"Book Name", "Book ID", "Issue Date", "Return Date"}, 0
         );
@@ -1135,7 +922,7 @@ private void showStudentProfile(String usn) {
 
         frame.setVisible(true);
 
-        // Load student data and photo in background (same as before)
+
         new Thread(() -> {
             try {
               Connection conn = DriverManager.getConnection(
@@ -1169,7 +956,7 @@ private void showStudentProfile(String usn) {
                         contactLbl.setText("Contact: " + contact);
                     });
 
-                    // Load photo
+                
                     String imageUrl = rs.getString("imageurl");
                     if (imageUrl == null || imageUrl.isEmpty()) {
                         imageUrl = "https://university-student-photos.s3.ap-south-1.amazonaws.com/049/" 
@@ -1185,7 +972,7 @@ private void showStudentProfile(String usn) {
                         } catch (Exception ex) { photoLabel.setText("No Photo"); }
                     });
 
-                    // Load borrowed books
+                
                     PreparedStatement psBooks = conn.prepareStatement(
                         "SELECT b.bookname, i.bookid, i.issuedate, i.returndate " +
                         "FROM issuedbooks i JOIN books b ON i.bookid=b.bookid " +
@@ -1210,4 +997,5 @@ private void showStudentProfile(String usn) {
         }).start();
     });
 }
+
 }
