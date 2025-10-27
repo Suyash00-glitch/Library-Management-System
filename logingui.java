@@ -11,16 +11,16 @@ class SwingDemo {
         jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jfrm.setLocationRelativeTo(null);
 
-        // Modern look & feel
+    
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception ignored) {}
 
-        // Main panel
+        
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
-        mainPanel.setBackground(new Color(245, 250, 255)); // same light blue theme
+        mainPanel.setBackground(new Color(245, 250, 255));
 
-        // Form panel with titled border like AddBook
+        
         JPanel formPanel = new JPanel(new GridBagLayout());
         formPanel.setBackground(new Color(245, 250, 255));
         formPanel.setBorder(BorderFactory.createTitledBorder(
@@ -33,7 +33,7 @@ class SwingDemo {
         gbc.insets = new Insets(10, 15, 10, 15);
         gbc.anchor = GridBagConstraints.WEST;
 
-        // Labels and fields
+        
         JLabel usnLabel = new JLabel("Enter USN:");
         usnLabel.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         JTextField usnField = new JTextField(15);
@@ -56,7 +56,7 @@ class SwingDemo {
         JLabel msgLabel = new JLabel(" ");
         msgLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
 
-        // Layout fields
+    
         gbc.gridx = 0; gbc.gridy = 0; formPanel.add(usnLabel, gbc);
         gbc.gridx = 1; formPanel.add(usnField, gbc);
 
@@ -83,7 +83,7 @@ class SwingDemo {
         jfrm.getContentPane().setBackground(new Color(230, 240, 255));
         jfrm.setVisible(true);
 
-        // Action listener
+    
         loginBtn.addActionListener(ae -> {
             String usn = usnField.getText();
             String pass = new String(passField.getPassword());
@@ -154,3 +154,4 @@ public class logingui {
         SwingUtilities.invokeLater(() -> new SwingDemo());
     }
 }
+
