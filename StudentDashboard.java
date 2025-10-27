@@ -11,13 +11,13 @@ public class StudentDashboard {
         jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jfrm.setLocationRelativeTo(null);
 
-        // Main tabbed pane with theme
+    
          JTabbedPane jtp = new JTabbedPane();
     jtp.setFont(new Font("Segoe UI", Font.BOLD, 16));
-    jtp.setBackground(new Color(245, 245, 255)); // light bluish
-    jtp.setForeground(new Color(40, 40, 80));    // dark tab titles
+    jtp.setBackground(new Color(245, 245, 255)); 
+    jtp.setForeground(new Color(40, 40, 80));    
 
-        // Add tabs
+        
         jtp.addTab("Search Books", new SearchBooks());
         jtp.addTab("Profile", new Profile(loggedInUSN));
 
@@ -30,13 +30,13 @@ public class StudentDashboard {
     }
 }
 
-// --------------------- SEARCH BOOKS PANEL (ADMIN DASHBOARD STYLE) ------------------------
+
 class SearchBooks extends JPanel {
     SearchBooks() {
         setLayout(new BorderLayout(10, 10));
         setBackground(new Color(245, 250, 255));
 
-        // Form panel with frame/border
+        
         JPanel formPanel = new JPanel(new GridBagLayout());
         formPanel.setBackground(new Color(245, 250, 255));
         formPanel.setBorder(BorderFactory.createTitledBorder(
@@ -80,7 +80,7 @@ class SearchBooks extends JPanel {
 
         add(formPanel, BorderLayout.CENTER);
 
-        // Button panel
+        
         JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         btnPanel.setBackground(new Color(245, 250, 255));
         JButton searchBtn = new JButton("Search");
@@ -106,7 +106,7 @@ class SearchBooks extends JPanel {
         });
     }
 
-    // keep your existing showbooks logic unchanged
+    
     boolean showbooks(String id, String author) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -151,7 +151,7 @@ class SearchBooks extends JPanel {
     }
 }
 
-// --------------------- PROFILE PANEL -----------------------
+
 class Profile extends JPanel {
     JLabel nameLabel, usnLabel, branchLabel, secLabel, yearLabel, emailLabel, contactLabel, imageLabel;
     JTable borrowedTable;
@@ -161,7 +161,7 @@ class Profile extends JPanel {
         setLayout(new BorderLayout(15, 15));
         setBackground(Color.WHITE);
 
-        // Title
+        
         JPanel titlePanel = new JPanel();
         titlePanel.setBackground(new Color(0, 102, 204));
         titlePanel.setPreferredSize(new Dimension(700, 60));
@@ -171,7 +171,7 @@ class Profile extends JPanel {
         titlePanel.add(title);
         add(titlePanel, BorderLayout.NORTH);
 
-        // Top panel: Image + Info
+        
         JPanel topPanel = new JPanel(new BorderLayout(10, 10));
         topPanel.setBackground(Color.WHITE);
 
@@ -201,7 +201,7 @@ class Profile extends JPanel {
         topPanel.add(infoPanel, BorderLayout.CENTER);
         add(topPanel, BorderLayout.NORTH);
 
-        // Borrowed books table
+        
         String[] columns = {"Book ID", "Book Name", "Author", "Issued Date", "Return Date", "Status"};
         model = new DefaultTableModel(columns, 0);
         borrowedTable = new JTable(model);
@@ -291,3 +291,4 @@ class Profile extends JPanel {
         } catch (Exception e) { e.printStackTrace(); }
     }
 }
+
